@@ -14,34 +14,29 @@
         (system: f { pkgs = import inputs.nixpkgs { inherit system; }; });
     in {
       devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell.override {
-          # Override stdenv in order to change compiler:
-          stdenv = pkgs.llvmPackages_21.stdenv;
-        } {
-          packages = with pkgs; [
-            pkg-config
-            # audio
-            alsa-lib
-            libpulseaudio
-            libjack2
-            # Xorg
-            xorg.libX11
-            xorg.libXinerama
-            xorg.libXcursor
-            xorg.libXrandr
-            xorg.libXi
-            # OpenGL
-            libGLU
-            libGL
-            glew
-            libtool
-            # svg
-            python312
-            python312Packages.drawsvg
-            python312Packages.python-lsp-server
-            multimarkdown
-          ];
-        };
+        default = with pkgs;
+          mkShell rec {
+            buildInputs = [
+              pkg-config
+              wayland
+              fontconfig
+              alsa-lib
+              libxkbcommon
+              # OpenGL
+              libGLU
+              libGL
+              glew
+            ];
+
+            shellHook = ''
+              export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${
+                builtins.toString (pkgs.lib.makeLibraryPath buildInputs)
+              }";
+            '';
+          };
+
+        PKG_CONFIG_PATH = "${pkgs.alsa-lib}/lib/pkgconfig";
+
       });
     };
 }
