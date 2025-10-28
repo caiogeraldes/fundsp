@@ -8,7 +8,8 @@
     clippy::len_zero,
     clippy::double_neg,
     clippy::many_single_char_names,
-    clippy::manual_range_contains
+    clippy::manual_range_contains,
+    double_negations
 )]
 
 use fundsp::audiounit::*;

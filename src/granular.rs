@@ -1,5 +1,6 @@
 //! Granular synthesizer. WIP.
 
+#![allow(clippy::doc_overindented_list_items)]
 use super::audiounit::*;
 use super::buffer::*;
 use super::math::*;

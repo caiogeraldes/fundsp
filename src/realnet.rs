@@ -24,7 +24,7 @@ pub(crate) enum NetMessage {
 pub(crate) enum NetReturn {
     #[default]
     Null,
-    Net(Net),
+    Net(Box<Net>),
     Unit(Box<dyn AudioUnit>),
 }
 
@@ -75,7 +75,7 @@ impl NetBackend {
                                     .sender
                                     .as_ref()
                                     .unwrap()
-                                    .try_send(NetReturn::Net(net))
+                                    .try_send(NetReturn::Net(Box::new(net)))
                                     .is_ok()
                                 {}
                             }
@@ -100,7 +100,7 @@ impl NetBackend {
                 .sender
                 .as_ref()
                 .unwrap()
-                .try_send(NetReturn::Net(net))
+                .try_send(NetReturn::Net(Box::new(net)))
                 .is_ok()
             {}
         }

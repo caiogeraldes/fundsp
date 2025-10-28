@@ -8,11 +8,11 @@
 //! The `combinator` module defines the graph operators.
 #![cfg_attr(all(not(feature = "std"), not(test)), no_std)]
 #![allow(
+    double_negations,
     clippy::precedence,
     clippy::type_complexity,
     clippy::float_cmp,
     clippy::len_zero,
-    clippy::double_neg,
     clippy::needless_range_loop,
     clippy::manual_range_contains,
     clippy::too_many_arguments,
