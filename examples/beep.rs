@@ -40,7 +40,7 @@ where
     // FM synthesis.
     //let f = 110.0;
     //let m = 5.0;
-    //let c = oversample(sine_hz(f as f64) * f * m + f >> sine());
+    //let c = oversample(sine_hz(f as f32) * f * m + f >> sine());
 
     // Pulse wave.
     //let c = lfo(|t| {
